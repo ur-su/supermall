@@ -51,6 +51,7 @@ import FeatureView from "./childComps/FeatureViews.vue"
 // 方法
 import { getHomeMultidata,getHomeGoods} from "network/home";
 import {debounce} from "common/utils"
+import {itemListenerMixin,backTopMixin} from "common/mixin"
 
 
 export default {
@@ -65,6 +66,7 @@ export default {
     Scroll,
     BackTop
   },
+  mixins:[itemListenerMixin,backTopMixin],
   data() {
     return {
       banners:[],
@@ -75,16 +77,26 @@ export default {
         'sell':{ page:0,list:[] }
       },
       currentType:"pop",
-      isShowBackTop:false,
+      // isShowBackTop:false,
       tabOffsetTop: 0,
-      isTabFixed:false
+      isTabFixed:false,
+      saveY:0
     } 
   },
   computed:{
-
     showGoods() {
       return this.goods[this.currentType].list
     }
+  },
+  activated(){
+    // console.log(this.save);
+    this.$refs.scroll.refresh()
+    this.$refs.scroll.scrollTo(0,this.saveY,0)
+    
+  },
+  deactivated(){
+    this.saveY = this.$refs.scroll.scroll.y
+    // console.log(this.saveY);
   },
   created(){
     // 1.请求多个数据 
@@ -97,17 +109,6 @@ export default {
   },
   mounted(){
 
-    // 1.图片加载完成的事件监听
-    const refresh = debounce(this.$refs.scroll.refresh,200)
-    //监听item中图片加载完成 事件总线在main.js
-    this.$bus.$on("itemImageLoad",()=>{
-      refresh()
-    })
-
-    // 2.获取tabControl的offsetTop
-    // 所有的组件都有一个属性叫$el:拥有获取组件中的元素
-    // console.log(this.$refs.tabControl.$el.offsetTop);
-    // this.tabOffsetTop = this.$refs.tabControl.$el.offsetTop
   },
   methods:{
     // 防抖动函数 P174 已经被封装到utils中
@@ -140,9 +141,10 @@ export default {
       this.$refs.tabControl2.currentIndex = index;
 
     },
-    backClick(){
-      this.$refs.scroll.scrollTo(0,0,500)
-    },
+    // 抽成组件了在mixin中
+    // backClick(){
+    //   this.$refs.scroll.scrollTo(0,0,500)
+    // },
     contentScroll(position){
       // 1.判断BackTop是否显示
       this.isShowBackTop = (-position.y) > 1000

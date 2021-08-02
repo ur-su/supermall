@@ -9,6 +9,8 @@
 
 <script>
   import BScroll from "better-scroll"
+  import ObserveDom from "@better-scroll/observe-dom"
+  BScroll.use(ObserveDom)
 
 export default {
   name:"Scroll",
@@ -40,6 +42,7 @@ export default {
       click:true,
       probeType:this.probeType,
       pullUpLoad:this.pullUpLoad,
+      observeDOM:true
     })
 
     // this.$nextTick(() => {
@@ -68,7 +71,7 @@ export default {
       this.scroll && this.scroll.scrollTo(x,y,time)
     },
     refresh(){
-      console.log("-------");
+      // console.log("--------");
       this.scroll && this.scroll.refresh()
     },
     finishPullUp(){

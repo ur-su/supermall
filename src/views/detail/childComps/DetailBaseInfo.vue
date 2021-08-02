@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style scoped>
-  base-info {
+  .base-info {
     margin-top: 15px;
     padding: 0 8px;
     color: #999;
