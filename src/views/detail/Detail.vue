@@ -159,14 +159,14 @@ export default {
 
     contentScroll(position){
       // 1.获取y值
-      const positionY = -position.y
+      let positionY = -position.y
 
       // 2.positionY和主题中值进行对比 
 
       let length = this.themeTopYs.length
 
       for (let i=0 ; i<length ;i++){ // 遍历出来后是 字符串
-        if ((this.currentIndex) !== i &&  ((i < length -1 && positionY >= this.themeTopYs[i] && positionY <this.themeTopYs[i+1]) || (i == length-1 && positionY >= this.themeTopYs[i]))){
+        if(this.currentIndex!==i && positionY>=this.themeTopYs[i] && positionY<this.themeTopYs[i+1]){
           this.currentIndex = i;
           // console.log(this.$refs.nav);
           // this.$refs.nav.currentIndex 这个属性是 nav-bar组件中的currentIndex

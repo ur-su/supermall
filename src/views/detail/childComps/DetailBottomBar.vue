@@ -18,7 +18,6 @@
       <div class="cart" @click="addToCart">加入购物车</div>
       <div class="buy">购买</div>
     </div>
-    <!-- <sport-ball ref="ball" class="sport-ball"></sport-ball> -->
   </div>
 </template>
 
@@ -36,7 +35,6 @@ export default {
 <style scoped>
   .bottom-bar {
     height: 49px;
-    /* width: 320px; */
     /* line-height: 49px; */
     background-color: #fff;
     position: fixed;
@@ -93,9 +91,4 @@ export default {
     background-color: #f69;
   }
 
-  .sport-ball{
-    position: absolute;
-    left: 225px;
-    bottom: 20px;
-  }
 </style>

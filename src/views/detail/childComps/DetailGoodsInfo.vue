@@ -63,6 +63,10 @@ export default {
     bottom: 0;
   }
 
+  .info-desc .end::after {
+    right: 0;
+  }
+
   .info-desc .desc {
     padding: 15px 0;
     font-size: 14px;
